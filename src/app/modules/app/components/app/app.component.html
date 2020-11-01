@@ -1,0 +1,18 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>D&D Tracker</mat-toolbar-row>
+    <mat-toolbar-row fxLayoutGap="1%">
+        <a mat-raised-button
+           [routerLink]="['/monsters']">Monsters</a>
+        <a mat-raised-button
+           *ngIf="_userService.getCurrentUser()"
+           [routerLink]="['/user', _userService.getCurrentUser().userId]">My Profile</a>
+        <a mat-raised-button
+           *ngIf="!_userService.getCurrentUser()"
+           [routerLink]="['/login']">Log In</a>
+        <a mat-raised-button
+           *ngIf="_userService.getCurrentUser()"
+           (click)="logOut()"
+           [routerLink]="['/login']">Log Out</a>
+    </mat-toolbar-row>
+</mat-toolbar>
+<router-outlet></router-outlet>

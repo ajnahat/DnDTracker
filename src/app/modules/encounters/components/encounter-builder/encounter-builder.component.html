@@ -1,0 +1,73 @@
+<mat-expansion-panel [expanded]="true">
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            New Encounter
+        </mat-panel-title>
+        <mat-panel-description>
+            Create a new encounter!
+        </mat-panel-description>
+    </mat-expansion-panel-header>
+    <mat-form-field>
+        <mat-label>Encounter Name</mat-label>
+        <input matInput
+               required
+               name="encounterName"
+               [(ngModel)]="encounterName" />
+    </mat-form-field>
+    <mat-card *ngFor="let wave of waves; let i = index">
+        <mat-card-subtitle>
+            Wave {{ i + 1 }}
+        </mat-card-subtitle>
+
+        <button mat-fab
+                color="primary"
+                [disabled]="waves.length == 1"
+                (click)="deleteWave(i)">
+            <mat-icon>delete</mat-icon>
+        </button>
+
+        <div *ngFor="let monster of wave.monsters; let j = index;">
+            <button mat-mini-fab
+                    id="delete-monster-button"
+                    [disabled]="wave.monsters.length == 1"
+                    color="primary"
+                    (click)="deleteMonster(wave, j)">
+                <mat-icon>delete</mat-icon>
+            </button>
+            <mat-form-field id="monster-count">
+                <mat-label>Count</mat-label>
+                <input matInput
+                       required
+                       [(ngModel)]="monster.count" />
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Monster</mat-label>
+                <mat-select [(value)]="wave.monsters[j].item"
+                            required>
+                    <mat-option *ngFor="let mons of monsters;"
+                                [value]="mons">{{ mons.name }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <button mat-mini-fab
+                color="primary"
+                (click)="addMonster(wave)">
+            +
+        </button>
+    </mat-card>
+
+    <mat-action-row>
+        <button mat-raised-button
+                color="primary"
+                (click)="addWaveAndMonster()">
+            Add Wave
+        </button>
+        <button mat-raised-button
+                color="primary"
+                [disabled]="!(encounterName && (encounterName | trim).length > 0) || !(waves | validateWaves)"
+                (click)="createEncounter()">
+            Create Encounter
+        </button>
+    </mat-action-row>
+</mat-expansion-panel>

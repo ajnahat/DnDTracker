@@ -1,0 +1,37 @@
+<mat-card *ngIf="monster"
+          id="container">
+    <mat-card-title>
+        {{ monster.name }}
+    </mat-card-title>
+    <mat-card-content>
+        <div class="inlineDiv">
+            STR
+            {{ monster.strength }}
+        </div>
+        <div class="inlineDiv">
+            DEX
+            {{ monster.dexterity }}
+        </div>
+        <div class="inlineDiv">
+            CON
+            {{ monster.constitution }}
+        </div>
+        <div class="inlineDiv">
+            INT
+            {{ monster.intelligence }}
+        </div>
+        <div class="inlineDiv">
+            WIS
+            {{ monster.wisdom }}
+        </div>
+        <div class="inlineDiv">
+            CHA
+            {{ monster.charisma }}
+        </div>
+    </mat-card-content>
+
+    <div>
+        <div class="inlineDiv">CR: {{ monster.challenge_rating }}</div>
+        <div class="inlineDiv">XP: {{ monster.xp }}</div>
+    </div>
+</mat-card>

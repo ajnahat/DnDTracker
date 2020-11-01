@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\modules",
+    "\\src\\app\\modules\\monsters",
+    "\\src\\app\\modules\\monsters\\components",
+    "\\src\\app\\modules\\monsters\\components\\monsters",
+    "\\src\\app\\modules\\shared",
+    "\\src\\app\\modules\\shared\\components",
+    "\\src\\app\\modules\\shared\\components\\confirm-dialog"
+  ],
+  "SelectedNode": "\\src\\app\\modules\\encounters\\services\\encounters.service.ts",
+  "PreviewInSolutionExplorer": false
+}

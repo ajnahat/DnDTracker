@@ -1,0 +1,10 @@
+<mat-card>
+    <mat-card-title fxLayoutAlign="center">Monsters</mat-card-title>
+    <app-alphabet-selector fxLayoutAlign="center"
+                           (letterClicked)="letterClicked($event)"></app-alphabet-selector>
+
+    <div *ngFor="let monster of filteredMonsters"
+         class="monsterContainer">
+        <app-monster-details [monsterIndex]="monster.index"></app-monster-details>
+    </div>
+</mat-card>

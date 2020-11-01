@@ -1,0 +1,19 @@
+<mat-card *ngFor="let wave of encounter.waves; let i = index">
+    <mat-card-subtitle *ngIf="encounter.waves.length > 1">Wave {{ i + 1 }}</mat-card-subtitle>
+    <ng-container *ngIf="!isEditing">
+        <mat-card-content *ngFor="let monster of wave.monsters"
+                          fxLayout="row"
+                          fxLayoutGap="1%">
+            <p fxFlex="3%"
+               *ngIf="monster.count > 1"
+               fxLayoutAlign="center center"
+               id="monsterCount">{{ monster.count }}</p>
+            <app-monster-details id="monsterDetails"
+                                 fxFlex="monster.count > 1 ? 96% : 100%"
+                                 [monsterIndex]="monster.index"></app-monster-details>
+        </mat-card-content>
+    </ng-container>
+    <mat-card-content *ngIf="isEditing">
+        <app-encounter-builder [encounter]="encounter"></app-encounter-builder>
+    </mat-card-content>
+</mat-card>

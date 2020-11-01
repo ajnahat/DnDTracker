@@ -1,0 +1,19 @@
+<mat-card>
+    <mat-card-content>
+        <mat-form-field>
+            <mat-label>User Name</mat-label>
+            <input matInput
+                   required
+                   [(ngModel)]="userName" />
+        </mat-form-field>
+     
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-raised-button
+                color="primary"
+                [disabled]="!userName || !((userName | trim).length > 0)"
+                (click)="createUser()">
+            Create Account
+        </button>
+    </mat-card-actions>
+</mat-card>
