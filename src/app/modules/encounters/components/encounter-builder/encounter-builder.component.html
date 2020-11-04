@@ -62,7 +62,7 @@
                 <mat-label>Monster</mat-label>
                 <mat-select [(value)]="wave.monsters[j].index"
                             required>
-                    <mat-option *ngFor="let mons of monsters;"
+                    <mat-option *ngFor="let mons of monsters(wave, j)"
                                 [value]="mons.index">{{ mons.name }}</mat-option>
                 </mat-select>
             </mat-form-field>

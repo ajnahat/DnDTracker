@@ -6,11 +6,7 @@
     "\\src\\app\\modules",
     "\\src\\app\\modules\\encounters",
     "\\src\\app\\modules\\encounters\\components",
-    "\\src\\app\\modules\\encounters\\components\\encounter-builder",
-    "\\src\\app\\modules\\encounters\\pipes",
-    "\\src\\app\\modules\\monsters",
-    "\\src\\app\\modules\\monsters\\models",
-    "\\src\\app\\modules\\users\\components"
+    "\\src\\app\\modules\\encounters\\components\\encounter-builder"
   ],
   "SelectedNode": "\\src\\app\\modules\\encounters\\components\\encounter-builder\\encounter-builder.component.ts",
   "PreviewInSolutionExplorer": false

@@ -19,7 +19,10 @@ export class EncounterBuilderComponent implements OnInit {
     @Output()
     public encounterBuilt: EventEmitter<any> = new EventEmitter<any>();
 
-    public monsters: monster[] = [];
+    private _monsters: monster[] = [];
+    public monsters(wave: wave, monsterIndex: number): monster[] {
+        return this._monsters.filter(o => !wave.monsters.map(p => p.index).includes(o.index) || wave.monsters[monsterIndex].index == o.index);
+    }
 
     constructor(private _encounterService: EncountersService,
         private _monsterService: MonstersService,
@@ -43,7 +46,7 @@ export class EncounterBuilderComponent implements OnInit {
     }
 
     public ngOnInit(): void {
-        this._monsterService.getMonsters().subscribe(data => this.monsters.push(...data),
+        this._monsterService.getMonsters().subscribe(data => this._monsters.push(...data),
             null,
             () => {
                 if (this.encounter != null)
