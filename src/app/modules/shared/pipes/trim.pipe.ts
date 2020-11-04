@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class TrimPipe implements PipeTransform {
 
-    transform(value: string): string {
-        return value == null ? null : value.trim();
+    public transform(value: string): string {
+        return value?.trim();
     }
 }

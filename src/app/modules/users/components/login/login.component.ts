@@ -9,26 +9,25 @@ import { UserService } from '../../services/user.service';
     styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnDestroy {
-    userName: string;
-    password: string;
+    public userName: string;
 
     constructor(private _userService: UserService,
         private _authService: AuthenticationService,
         private _router: Router,
         private _snackBar: MatSnackBar) { }
 
-    login() {
+    public login() {
         this._authService.attemptlogIn(this.userName)
             .subscribe(user => this._userService.setCurrentUser(user),
                 () => this._snackBar.open("There is no user by that name.", "X", { verticalPosition: "top" }),
                 () => this._router.navigate(["/user", this._userService.getCurrentUser().userId]));
     }
 
-    createAccount() {
+    public createAccount() {
         this._router.navigate(["/create-user"]);
     }
 
-    ngOnDestroy(): void {
+    public ngOnDestroy(): void {
         this._snackBar.dismiss();
     }
 }

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { AlphabetSelectorComponent } from '../../../shared/components/alphabet-selector/alphabet-selector.component';
 import { monster } from '../../models/monster';
 import { MonstersService } from '../../services/monsters.service';
 
@@ -7,18 +8,22 @@ import { MonstersService } from '../../services/monsters.service';
     styleUrls: ['./monsters.component.scss']
 })
 export class MonstersComponent implements OnInit {
-    monsters: monster[] = [];
-    filteredMonsters: monster[] = [];
-    title = 'Monsters';
+    @ViewChild(AlphabetSelectorComponent) selector: AlphabetSelectorComponent;
+
+    public monsters: monster[] = [];
+    public filteredMonsters: monster[] = [];
+    public title = 'Monsters';
 
     constructor(private _monstersService: MonstersService) { }
 
-    ngOnInit(): void {
+    public ngOnInit(): void {
         this._monstersService.getMonsters()
-            .subscribe(data => this.monsters.push(...data), null, () => this.letterClicked("A"));
+            .subscribe(data => this.monsters.push(...data),
+                null,
+                () => this.selector.letterClick("A"));
     }
 
-    letterClicked(letter: string) {
+    public letterClicked(letter: string) {
         this.filteredMonsters = this.monsters.filter(o => o.name[0] == letter);
     }
 }

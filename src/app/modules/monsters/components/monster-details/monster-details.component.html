@@ -1,37 +1,117 @@
-<mat-card *ngIf="monster"
-          id="container">
+<mat-card *ngIf="monster">
     <mat-card-title>
         {{ monster.name }}
     </mat-card-title>
-    <mat-card-content>
-        <div class="inlineDiv">
-            STR
-            {{ monster.strength }}
-        </div>
-        <div class="inlineDiv">
-            DEX
-            {{ monster.dexterity }}
-        </div>
-        <div class="inlineDiv">
-            CON
-            {{ monster.constitution }}
-        </div>
-        <div class="inlineDiv">
-            INT
-            {{ monster.intelligence }}
-        </div>
-        <div class="inlineDiv">
-            WIS
-            {{ monster.wisdom }}
-        </div>
-        <div class="inlineDiv">
-            CHA
-            {{ monster.charisma }}
-        </div>
-    </mat-card-content>
 
-    <div>
-        <div class="inlineDiv">CR: {{ monster.challenge_rating }}</div>
-        <div class="inlineDiv">XP: {{ monster.xp }}</div>
-    </div>
+    <mat-card-content fxLayout="row">
+        <mat-card-content fxFlex="20%"
+                          >
+            <mat-card-content fxLayout="row"
+                              fxLayoutGap="5%">
+                <div fxLayout="column"
+                     fxLayoutAlign="center center"
+                     id="scoreHeader">
+                    STR
+                    <div>
+                        {{ monster.strength }}
+                    </div>
+                </div>
+                <div fxLayout="column"
+                     fxLayoutAlign="center center"
+                     id="scoreHeader">
+                    DEX
+                    <div>
+                        {{ monster.dexterity }}
+                    </div>
+                </div>
+                <div fxLayout="column"
+                     fxLayoutAlign="center center"
+                     id="scoreHeader">
+                    CON
+                    <div>
+                        {{ monster.constitution }}
+                    </div>
+                </div>
+                <div fxLayout="column"
+                     fxLayoutAlign="center center"
+                     id="scoreHeader">
+                    INT
+                    <div>
+                        {{ monster.intelligence }}
+                    </div>
+                </div>
+                <div fxLayout="column"
+                     fxLayoutAlign="center center"
+                     id="scoreHeader">
+                    WIS
+                    <div>
+                        {{ monster.wisdom }}
+                    </div>
+                </div>
+                <div fxLayout="column"
+                     fxLayoutAlign="center center"
+                     id="scoreHeader">
+                    CHA
+                    <div>
+                        {{ monster.charisma }}
+                    </div>
+                </div>
+            </mat-card-content>
+
+            <mat-card-content fxLayout="row"
+                              fxLayoutGap="5%">
+                <div fxLayout="column"
+                     fxLayoutAlign="center center"
+                     id="scoreHeader">
+                    CR
+                    <div>
+                        {{ monster.challenge_rating }}
+                    </div>
+                </div>
+                <div fxLayout="column"
+                     fxLayoutAlign="center center"
+                     id="scoreHeader">
+                    XP
+                    <div>
+                        {{ monster.xp }}
+                    </div>
+                </div>
+                <div fxLayout="column"
+                     fxLayoutAlign="center center"
+                     id="scoreHeader">
+                    HP
+                    <div>
+                        {{ monster.hit_points }}
+                    </div>
+                </div>
+                <div fxLayout="column"
+                     fxLayoutAlign="center center"
+                     id="scoreHeader">
+                    AC
+                    <div>
+                        {{ monster.armor_class }}
+                    </div>
+                </div>
+                <div fxLayout="column"
+                     fxLayoutAlign="center center"
+                     id="scoreHeader">
+                    Alignment
+                    <div>
+                        {{ monster.alignment | uppercase }}
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card-content>
+
+        <mat-card-content fxFlex="80%"
+                          fxLayout="row"
+                          fxLayoutGap="2%">
+            <div *ngFor="let action of monster.actions">
+                <strong>{{ action.name }}</strong>
+                <div>
+                    {{ action.desc }}
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card-content>
 </mat-card>

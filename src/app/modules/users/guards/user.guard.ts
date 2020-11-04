@@ -10,7 +10,7 @@ export class UserGuard implements CanActivate {
     constructor(private _userService: UserService,
         private _router: Router) { }
 
-    canActivate(
+    public canActivate(
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
         let result = this._userService.getCurrentUser()?.userId == route.params["id"];

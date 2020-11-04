@@ -4,4 +4,9 @@ button {
     font-size: 30px;
     margin-right: 5px;
     display: inline;
+    outline: none;
+}
+
+.selected {
+    color: #607d8b;
 }

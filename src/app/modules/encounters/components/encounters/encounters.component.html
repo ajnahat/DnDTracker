@@ -1,6 +1,7 @@
 <p *ngIf="encounters.length == 0">Uh-oh, it looks like you have no encounters! Use the encounter builder to get started!</p>
 <mat-expansion-panel *ngFor="let encounter of encounters; let i = index"
-                     [expanded]="i == 0">
+                     [expanded]="i == 0"
+                     id="encounterDetails">
     <mat-expansion-panel-header>
         <mat-panel-title>
             {{ encounter.encounterName }}
@@ -8,33 +9,5 @@
     </mat-expansion-panel-header>
 
     <app-encounter-details [encounter]="encounter"
-                           [isEditing]="edits.includes(encounter.encounterId)"></app-encounter-details>
-
-    <mat-action-row>
-        <ng-container *ngIf="!edits.includes(encounter.encounterId)">
-            <button mat-raised-button
-                    color="primary"
-                    (click)="editEncounter(encounter.encounterId)">
-                <mat-icon>edit</mat-icon>
-            </button>
-            <button mat-raised-button
-                    color="primary"
-                    (click)="tryDeleteEncounter(encounter.encounterId)">
-                <mat-icon>delete</mat-icon>
-            </button>
-        </ng-container>
-
-        <ng-container *ngIf="edits.includes(encounter.encounterId)">
-            <button mat-raised-button
-                    color="primary"
-                    (click)="commitChanges(encounter.encounterId)">
-                <mat-icon>check</mat-icon>
-            </button>
-            <button mat-raised-button
-                    color="primary"
-                    (click)="abandonChanges(encounter.encounterId)">
-                <mat-icon>cancel</mat-icon>
-            </button>
-        </ng-container>
-    </mat-action-row>
+                           (onDeleteEncounter)="deleteEncounter(encounter.encounterId)"></app-encounter-details>
 </mat-expansion-panel>

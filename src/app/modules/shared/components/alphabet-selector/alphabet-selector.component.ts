@@ -9,7 +9,7 @@ export class AlphabetSelectorComponent {
     public selectedLetter: string;
 
     @Output()
-    letterClicked: EventEmitter<string> = new EventEmitter<string>();
+    public letterClicked: EventEmitter<string> = new EventEmitter<string>();
 
     constructor() { }
 

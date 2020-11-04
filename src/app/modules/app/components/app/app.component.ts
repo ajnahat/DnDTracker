@@ -7,7 +7,7 @@ import { UserService } from '../../../users/services/user.service';
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-    test = 'DnDTracker';
+    public title: string = 'DnDTracker';
 
     constructor(public _userService: UserService) { }
 

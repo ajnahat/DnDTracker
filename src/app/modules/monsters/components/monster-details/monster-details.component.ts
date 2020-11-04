@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { MonstersService } from '../../services/monsters.service';
+import { Component, Input, OnInit } from '@angular/core';
 import { monster } from '../../models/monster';
+import { MonstersService } from '../../services/monsters.service';
 
 @Component({
     selector: 'app-monster-details',
@@ -9,13 +9,13 @@ import { monster } from '../../models/monster';
 })
 export class MonsterDetailsComponent implements OnInit {
     @Input()
-    monsterIndex: string;
+    public monsterIndex: string;
 
-    monster: monster;
+    public monster: monster;
 
     constructor(private _monstersService: MonstersService) { }
 
-    ngOnInit(): void {
+    public ngOnInit(): void {
         this._monstersService.getMonster(this.monsterIndex).subscribe(m => this.monster = m);
     }
 }

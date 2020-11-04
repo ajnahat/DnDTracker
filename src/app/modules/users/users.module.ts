@@ -11,6 +11,5 @@ import { UserComponent } from './components/user/user.component';
         EncountersModule
     ],
     declarations: [UserComponent, LoginComponent, CreateUserComponent]
-    
 })
 export class UsersModule { }

@@ -1,0 +1,11 @@
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+$dnd-theme-primary: mat-palette($mat-blue-grey);
+
+$dnd-theme-accent: mat-palette($mat-grey, A200, A100, A400);
+
+$dnd-theme: mat-light-theme(( color: ( primary: $dnd-theme-primary, accent: $dnd-theme-accent, ) ));
+
+@include angular-material-theme($dnd-theme);

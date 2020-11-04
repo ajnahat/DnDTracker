@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
-import { MonstersComponent } from './components/monsters/monsters.component';
 import { MonsterDetailsComponent } from './components/monster-details/monster-details.component';
+import { MonstersComponent } from './components/monsters/monsters.component';
 
 @NgModule({
     declarations: [

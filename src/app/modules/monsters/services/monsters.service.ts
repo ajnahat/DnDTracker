@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { monster } from '../models/monster';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { monster } from '../models/monster';
 
 @Injectable({
     providedIn: "root"

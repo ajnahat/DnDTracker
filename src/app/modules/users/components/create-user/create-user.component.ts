@@ -8,13 +8,13 @@ import { UserService } from '../../services/user.service';
     styleUrls: ['./create-user.component.scss']
 })
 export class CreateUserComponent implements OnDestroy {
-    userName: string;
+    public userName: string;
 
     constructor(private _router: Router,
         private _userService: UserService,
         private _snackBar: MatSnackBar) { }
 
-    createUser() {
+    public createUser() {
         this._userService
             .createUser(this.userName)
             .subscribe(user => this._userService.setCurrentUser(user),
@@ -22,7 +22,7 @@ export class CreateUserComponent implements OnDestroy {
                 () => this._router.navigate(['/user', this._userService.getCurrentUser().userId]));
     }
 
-    ngOnDestroy(): void {
+    public ngOnDestroy(): void {
         this._snackBar.dismiss();
     }
 }

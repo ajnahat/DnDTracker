@@ -1,5 +1,47 @@
-<mat-toolbar>
-    <mat-toolbar-row>{{userName}}'s Profile</mat-toolbar-row>
+<mat-toolbar *ngIf="!isEditing">
+    <mat-toolbar-row fxLayoutAlign="space-between center">
+        {{ currentUser.userName }}'s Profile
+        <div>
+            <button mat-raised-button
+                    id="editUser"
+                    matTooltip="Edit Profile"
+                    color="primary"
+                    (click)="isEditing = true">
+                <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-raised-button
+                    color="primary"
+                    matTooltip="Delete Profile"
+                    (click)="tryDeleteUser()">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </div>
+    </mat-toolbar-row>
+</mat-toolbar>
+<mat-toolbar *ngIf="isEditing">
+    <mat-toolbar-row fxLayoutAlign="space-between center"
+                     id="editToolbar">
+        <mat-form-field>
+            <mat-label>Username</mat-label>
+            <input matInput
+                   [(ngModel)]="currentUser.userName" />
+        </mat-form-field>
+        <div>
+            <button mat-raised-button
+                    id="editUser"
+                    matTooltip="Save Changes"
+                    color="primary"
+                    (click)="commitChanges()">
+                <mat-icon>check</mat-icon>
+            </button>
+            <button mat-raised-button
+                    color="primary"
+                    matTooltip="Abandon Changes"
+                    (click)="abandonChanges()">
+                <mat-icon>cancel</mat-icon>
+            </button>
+        </div>
+    </mat-toolbar-row>
 </mat-toolbar>
 <mat-card>
     <mat-card-header>
@@ -8,7 +50,8 @@
         </mat-card-title>
     </mat-card-header>
     <mat-card-content>
-        <app-encounter-builder (encounterBuilt)="refreshEncounters()"></app-encounter-builder>
+        <app-encounter-builder (encounterBuilt)="refreshEncounters()"
+                               [isNewEncounter]="true"></app-encounter-builder>
         <mat-expansion-panel [expanded]="true">
             <mat-expansion-panel-header>
                 <mat-panel-title>

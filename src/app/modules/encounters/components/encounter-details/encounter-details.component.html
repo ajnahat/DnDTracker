@@ -1,6 +1,6 @@
-<mat-card *ngFor="let wave of encounter.waves; let i = index">
-    <mat-card-subtitle *ngIf="encounter.waves.length > 1">Wave {{ i + 1 }}</mat-card-subtitle>
-    <ng-container *ngIf="!isEditing">
+<ng-container *ngIf="!isEditing">
+    <mat-card *ngFor="let wave of encounter.waves; let i = index">
+        <mat-card-subtitle *ngIf="encounter.waves.length > 1">Wave {{ i + 1 }}</mat-card-subtitle>
         <mat-card-content *ngFor="let monster of wave.monsters"
                           fxLayout="row"
                           fxLayoutGap="1%">
@@ -12,8 +12,43 @@
                                  fxFlex="monster.count > 1 ? 96% : 100%"
                                  [monsterIndex]="monster.index"></app-monster-details>
         </mat-card-content>
-    </ng-container>
-    <mat-card-content *ngIf="isEditing">
-        <app-encounter-builder [encounter]="encounter"></app-encounter-builder>
+    </mat-card>
+</ng-container>
+<mat-card *ngIf="isEditing">
+    <mat-card-content>
+        <app-encounter-builder [(encounter)]="encounter"
+                               [isNewEncounter]="false"></app-encounter-builder>
     </mat-card-content>
 </mat-card>
+<mat-action-row>
+    <ng-container *ngIf="!isEditing">
+        <button mat-raised-button
+                color="primary"
+                matTooltip="Edit Encounter"
+                (click)="isEditing = true">
+            <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-raised-button
+                color="primary"
+                matTooltip="Delete Encounter"
+                (click)="tryDeleteEncounter()">
+            <mat-icon>delete</mat-icon>
+        </button>
+    </ng-container>
+
+    <ng-container *ngIf="isEditing">
+        <button mat-raised-button
+                color="primary"
+                matTooltip="Save Changes"
+                [disabled]="!(encounter.waves | validateWaves)"
+                (click)="commitChanges()">
+            <mat-icon>check</mat-icon>
+        </button>
+        <button mat-raised-button
+                color="primary"
+                matTooltip="Abandon Changes"
+                (click)="abandonChanges()">
+            <mat-icon>cancel</mat-icon>
+        </button>
+    </ng-container>
+</mat-action-row>

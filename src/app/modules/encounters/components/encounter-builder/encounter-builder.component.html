@@ -1,36 +1,54 @@
-<mat-expansion-panel [expanded]="true">
+<mat-expansion-panel [expanded]="true"
+                     *ngIf="encounter">
     <mat-expansion-panel-header>
         <mat-panel-title>
-            New Encounter
+            {{ isNewEncounter ? "New Encounter" : "Update " + encounter.encounterName }}
         </mat-panel-title>
         <mat-panel-description>
-            Create a new encounter!
+            {{ isNewEncounter ? "Create a new encounter!" : "Change your encounter!" }}
         </mat-panel-description>
     </mat-expansion-panel-header>
     <mat-form-field>
         <mat-label>Encounter Name</mat-label>
         <input matInput
                required
-               name="encounterName"
-               [(ngModel)]="encounterName" />
+               [(ngModel)]="encounter.encounterName" />
     </mat-form-field>
-    <mat-card *ngFor="let wave of waves; let i = index">
+    <mat-card *ngFor="let wave of encounter.waves; let i = index; let ic = count">
         <mat-card-subtitle>
             Wave {{ i + 1 }}
         </mat-card-subtitle>
 
         <button mat-fab
                 color="primary"
-                [disabled]="waves.length == 1"
+                [disabled]="ic == 1"
+                matTooltip="Delete Wave"
                 (click)="deleteWave(i)">
             <mat-icon>delete</mat-icon>
         </button>
+        <button mat-fab
+                color="primary"
+                id="waveSortArrow"
+                *ngIf="ic > 1"
+                [disabled]="ic > 1 && i == 0"
+                (click)="sortWaveUp(i)">
+            <mat-icon>arrow_upward</mat-icon>
+        </button>
+        <button mat-fab
+                color="primary"
+                id="waveSortArrow"
+                *ngIf="encounter.waves.length > 1"
+                [disabled]="ic > 1 && i == ic - 1"
+                (click)="sortWaveDown(i)">
+            <mat-icon>arrow_downward</mat-icon>
+        </button>
 
-        <div *ngFor="let monster of wave.monsters; let j = index;">
+        <div *ngFor="let monster of wave.monsters; let j = index; let jc = count">
             <button mat-mini-fab
                     id="delete-monster-button"
-                    [disabled]="wave.monsters.length == 1"
+                    [disabled]="jc == 1"
                     color="primary"
+                    matTooltip="Delete Monster"
                     (click)="deleteMonster(wave, j)">
                 <mat-icon>delete</mat-icon>
             </button>
@@ -40,18 +58,35 @@
                        required
                        [(ngModel)]="monster.count" />
             </mat-form-field>
-            <mat-form-field>
+            <mat-form-field id="monster">
                 <mat-label>Monster</mat-label>
-                <mat-select [(value)]="wave.monsters[j].item"
+                <mat-select [(value)]="wave.monsters[j].index"
                             required>
                     <mat-option *ngFor="let mons of monsters;"
-                                [value]="mons">{{ mons.name }}</mat-option>
+                                [value]="mons.index">{{ mons.name }}</mat-option>
                 </mat-select>
             </mat-form-field>
+            <button mat-mini-fab
+                    id="monsterSortArrow"
+                    *ngIf="jc > 1"
+                    [disabled]="jc > 1 && j == jc - 1"
+                    color="primary"
+                    (click)="sortMonsterDown(wave, j)">
+                <mat-icon>arrow_downward</mat-icon>
+            </button>
+            <button mat-mini-fab
+                    id="monsterSortArrow"
+                    *ngIf="jc > 1"
+                    [disabled]="jc > 1 && j == 0"
+                    color="primary"
+                    (click)="sortMonsterUp(wave, j)">
+                <mat-icon>arrow_upward</mat-icon>
+            </button>
         </div>
 
         <button mat-mini-fab
                 color="primary"
+                matTooltip="Add Monster"
                 (click)="addMonster(wave)">
             +
         </button>
@@ -64,10 +99,17 @@
             Add Wave
         </button>
         <button mat-raised-button
+                *ngIf="isNewEncounter"
                 color="primary"
-                [disabled]="!(encounterName && (encounterName | trim).length > 0) || !(waves | validateWaves)"
+                [disabled]="!(encounter.encounterName && (encounter.encounterName | trim).length > 0) || !(encounter.waves | validateWaves)"
                 (click)="createEncounter()">
             Create Encounter
+        </button>
+        <button mat-raised-button
+                *ngIf="isNewEncounter"
+                color="primary"
+                (click)="reset()">
+            Start Over
         </button>
     </mat-action-row>
 </mat-expansion-panel>
