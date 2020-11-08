@@ -18,9 +18,11 @@ export class LoginComponent implements OnDestroy {
 
     public login() {
         this._authService.attemptlogIn(this.userName)
-            .subscribe(user => this._userService.setCurrentUser(user),
-                () => this._snackBar.open("There is no user by that name.", "X", { verticalPosition: "top" }),
-                () => this._router.navigate(["/user", this._userService.getCurrentUser().userId]));
+            .subscribe(user => {
+                this._userService.setCurrentUser(user);
+                this._router.navigate(["/user", this._userService.getCurrentUser().userId]);
+            },
+                () => this._snackBar.open("There is no user by that name.", "X", { verticalPosition: "top" }));
     }
 
     public createAccount() {

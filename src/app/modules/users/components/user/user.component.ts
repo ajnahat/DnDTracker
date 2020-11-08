@@ -25,13 +25,11 @@ export class UserComponent implements OnInit {
     private deleteUser(id: number) {
         this._userService
             .deleteUser(id)
-            .subscribe(null,
-                null,
-                () => {
-                    this._userService.setCurrentUser(null);
-                    this._router.navigate(["/login"]);
-                    this._snackBar.open("Your account has been deleted", "X", { duration: 3000 });
-                });
+            .subscribe(() => {
+                this._userService.setCurrentUser(null);
+                this._router.navigate(["/login"]);
+                this._snackBar.open("Your account has been deleted", "X", { duration: 3000 });
+            });
     }
 
     public ngOnInit(): void {
@@ -68,9 +66,7 @@ export class UserComponent implements OnInit {
     public commitChanges() {
         this._userService
             .editUser(this.currentUser)
-            .subscribe(null,
-                null,
-                () => this.isEditing = false);
+            .subscribe(() => this.isEditing = false);
     }
 
     public abandonChanges() {

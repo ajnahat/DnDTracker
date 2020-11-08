@@ -17,7 +17,7 @@ export class EncounterBuilderComponent implements OnInit {
     @Input()
     public encounter: encounter;
     @Output()
-    public encounterBuilt: EventEmitter<any> = new EventEmitter<any>();
+    public encounterBuilt: EventEmitter<encounter> = new EventEmitter<encounter>();
 
     private _monsters: monster[] = [];
     public monsters(wave: wave, monsterIndex: number): monster[] {
@@ -27,23 +27,6 @@ export class EncounterBuilderComponent implements OnInit {
     constructor(private _encounterService: EncountersService,
         private _monsterService: MonstersService,
         private _userService: UserService) { }
-
-    private initialize(enc: encounter) {
-        this.encounter = enc;
-    }
-
-    private reset() {
-        this.encounter = new encounter();
-        this.encounter.userId = this._userService.getCurrentUser().userId;
-        this.addWaveAndMonster();
-    }
-
-    private addWave(): wave {
-        let w = new wave();
-        w.sort = this.encounter.waves.length + 1;
-        this.encounter.waves.push(w);
-        return w;
-    }
 
     public ngOnInit(): void {
         this._monsterService.getMonsters().subscribe(data => this._monsters.push(...data),
@@ -61,7 +44,7 @@ export class EncounterBuilderComponent implements OnInit {
     }
 
     public addMonster(wave: wave): monster {
-        let m = new monster(null);
+        let m = new monster();
         m.sort = wave.monsters.length + 1;
         wave.monsters.push(m);
         return m;
@@ -137,5 +120,22 @@ export class EncounterBuilderComponent implements OnInit {
             this.encounterBuilt.emit(enc),
             null,
             () => this.reset());
+    }
+
+    private initialize(enc: encounter) {
+        this.encounter = enc;
+    }
+
+    private reset() {
+        this.encounter = new encounter();
+        this.encounter.userId = this._userService.getCurrentUser().userId;
+        this.addWaveAndMonster();
+    }
+
+    private addWave(): wave {
+        let w = new wave();
+        w.sort = this.encounter.waves.length + 1;
+        this.encounter.waves.push(w);
+        return w;
     }
 }

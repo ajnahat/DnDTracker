@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
+import { ActivatedRouteSnapshot, CanActivate, Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 
 @Injectable({
@@ -10,14 +9,12 @@ export class UserGuard implements CanActivate {
     constructor(private _userService: UserService,
         private _router: Router) { }
 
-    public canActivate(
-        route: ActivatedRouteSnapshot,
-        state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-        let result = this._userService.getCurrentUser()?.userId == route.params["id"];
-        if (!result)
+    public canActivate(route: ActivatedRouteSnapshot): boolean {
+        if (this._userService.getCurrentUser()?.userId != route.params["id"])
         {
             this._router.navigate(["/login"]);
+            return false;
         }
-        return result;
+        return true;
     }
 }

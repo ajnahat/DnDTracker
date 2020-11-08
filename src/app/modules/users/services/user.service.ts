@@ -22,7 +22,7 @@ export class UserService {
     }
 
     public editUser(user: user): Observable<user> {
-        return this._http.put<user>(`${this._url}/${user.userId}`, user);
+        return this._http.put<user>(this._url, user);
     }
 
     public setCurrentUser(user: user) {

@@ -1,13 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\src",
-    "\\src\\app",
-    "\\src\\app\\modules",
-    "\\src\\app\\modules\\encounters",
-    "\\src\\app\\modules\\encounters\\components",
-    "\\src\\app\\modules\\encounters\\components\\encounter-builder"
+    ""
   ],
-  "SelectedNode": "\\src\\app\\modules\\encounters\\components\\encounter-builder\\encounter-builder.component.ts",
+  "SelectedNode": "\\tsconfig.app.json",
   "PreviewInSolutionExplorer": false
 }

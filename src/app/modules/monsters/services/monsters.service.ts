@@ -18,7 +18,7 @@ export class MonstersService {
 
     getMonsters(): Observable<monster[]> {
         return this._http
-            .get<any>(this._url)
+            .get(this._url)
             .pipe(
                 map<any, monster[]>(o => o.results)
             );

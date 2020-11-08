@@ -13,8 +13,4 @@ export class monster {
     xp: number;
     actions: action[];
     url: string;
-
-    constructor(indx: string) {
-        this.index = indx;
-    }
 }

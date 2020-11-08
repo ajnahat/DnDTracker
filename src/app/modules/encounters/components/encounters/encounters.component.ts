@@ -26,7 +26,7 @@ export class EncountersComponent implements OnInit {
     }
 
     public deleteEncounter(id: number) {
-        this._encounterService.deleteEncounter(id).subscribe(null, null, () => {
+        this._encounterService.deleteEncounter(id).subscribe(() => {
             let index = this.encounters.findIndex(o => o.encounterId == id);
             this.encounters.splice(index, 1);
         });
